@@ -4,8 +4,6 @@ import 'package:dexter/home_page.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 import 'CustomIcons.dart';
 import 'SocialIcons.dart';
@@ -19,8 +17,7 @@ class MyApp1 extends StatefulWidget {
 class _MyAppState extends State<MyApp1> {
   String _email;
   String _password;
-  //google sign
-  GoogleSignIn googleSignIn = new GoogleSignIn();
+
   final formkey = new GlobalKey<FormState>();
   checkFields() {
     final form = formkey.currentState;
@@ -29,28 +26,6 @@ class _MyAppState extends State<MyApp1> {
       return true;
     }
     return false;
-  }
-
-  LoginUser() {
-    if (checkFields()) {
-      FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: _email, password: _password)
-          .then((user) {
-        print("signed in as ${user.user}");
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomePage()));
-      }).catchError((e) {
-        print(e);
-      });
-    }
-  }
-
-  bool _isSelected = false;
-
-  void _radio() {
-    setState(() {
-      _isSelected = !_isSelected;
-    });
   }
 
   Widget radioButton(bool isSelected) => Container(
@@ -96,7 +71,7 @@ class _MyAppState extends State<MyApp1> {
               Padding(
                 padding: EdgeInsets.only(top: 20.0),
                 child: Container(
-                    height: 280, child: Image.asset("assets/dvm.jpg")),
+                    height: 280, child: Image.asset("assets/football2.png")),
               ),
               Expanded(
                 child: Container(),
@@ -111,10 +86,10 @@ class _MyAppState extends State<MyApp1> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
-                      Text("Dexter",
+                      Text("DEXTER",
                           style: TextStyle(
                               fontFamily: "Poppins-Bold",
-                              fontSize: ScreenUtil.getInstance().setSp(28),
+                              fontSize: ScreenUtil.getInstance().setSp(56),
                               letterSpacing: .6,
                               fontWeight: FontWeight.bold))
                     ],
@@ -131,27 +106,21 @@ class _MyAppState extends State<MyApp1> {
                       )),
                   SizedBox(height: ScreenUtil.getInstance().setHeight(40)),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          SizedBox(
-                            width: 12.0,
-                          ),
-                          GestureDetector(
-                            onTap: _radio,
-                            child: radioButton(_isSelected),
-                          ),
-                          SizedBox(
-                            width: 8.0,
-                          ),
-                          Text("Remember me",
-                              style: TextStyle(
-                                  fontSize: 12, fontFamily: "Poppins-Medium"))
-                        ],
-                      ),
                       InkWell(
-                        onTap: LoginUser,
+                        onTap: () async {
+                          if (checkFields()) {
+                            bool res = await AuthProvider()
+                                .loginWithEmail(_email, _password);
+                            res
+                                ? Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => HomePage()))
+                                : print("error logging in with email1");
+                          }
+                        },
                         child: Container(
                           width: ScreenUtil.getInstance().setWidth(330),
                           height: ScreenUtil.getInstance().setHeight(100),
@@ -170,7 +139,18 @@ class _MyAppState extends State<MyApp1> {
                           child: Material(
                             color: Colors.transparent,
                             child: InkWell(
-                              onTap: LoginUser,
+                              onTap: () async {
+                                if (checkFields()) {
+                                  bool res = await AuthProvider()
+                                      .loginWithEmail(_email, _password);
+                                  res
+                                      ? Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => HomePage()))
+                                      : print("error logging in with email2");
+                                }
+                              },
                               child: Center(
                                 child: Text("SIGNIN",
                                     style: TextStyle(
@@ -206,42 +186,37 @@ class _MyAppState extends State<MyApp1> {
                     children: <Widget>[
                       SocialIcon(
                         colors: [
-                          Color(0xFF102397),
-                          Color(0xFF187adf),
-                          Color(0xFF00eaf8),
-                        ],
-                        iconData: CustomIcons.facebook,
-                        onPressed: () {},
-                      ),
-                      SocialIcon(
-                        colors: [
                           Color(0xFFff4f38),
                           Color(0xFFff355d),
                         ],
                         iconData: CustomIcons.googlePlus,
                         onPressed: () async {
                           bool res = await AuthProvider().loginWithGoogle();
-                          if (!res) print("error logging in with google");
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => HomePage()));
+                          res
+                              ? Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HomePage()))
+                              : print("error logging in with google");
                         },
                       ),
                       SocialIcon(
                         colors: [
-                          Color(0xFF17ead9),
-                          Color(0xFF6078ea),
+                          Color(0xFF102397),
+                          Color(0xFF187adf),
+                          Color(0xFF00eaf8),
                         ],
-                        iconData: CustomIcons.twitter,
-                        onPressed: () {},
+                        iconData: CustomIcons.facebook,
+                        onPressed: () async {
+                          bool res = await AuthProvider().loginWithFacebook();
+                          res
+                              ? Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HomePage()))
+                              : print("error logging in with facebook");
+                        },
                       ),
-                      SocialIcon(
-                        colors: [
-                          Color(0xFF00c6fb),
-                          Color(0xFF005bea),
-                        ],
-                        iconData: CustomIcons.linkedin,
-                        onPressed: () {},
-                      )
                     ],
                   ),
                   SizedBox(

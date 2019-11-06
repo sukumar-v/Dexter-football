@@ -67,7 +67,7 @@ class _MyAppState extends State<Siginup> {
                 padding: EdgeInsets.only(top: 20.0),
                 child: Container(
                     height: 280,
-                    child: Image.asset("assets/dvm.jpg")),
+                    child: Image.asset("assets/football2.png")),
               ),
               Expanded(
                 child: Container(),
