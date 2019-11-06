@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "28848909826",
+    "firebase_url": "https://dexter-football.firebaseio.com",
+    "project_id": "dexter-football",
+    "storage_bucket": "dexter-football.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:28848909826:android:6a7a134c98515957e7411b",
+        "android_client_info": {
+          "package_name": "com.defog.dexter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "28848909826-46r1dbat7ggst0f4tn7mro58fikavhgf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.defog.dexter",
+            "certificate_hash": "cac43ae914fe546d04bb9c4e0dbb553d64c22ced"
+          }
+        },
+        {
+          "client_id": "28848909826-8pdmoqgd25os7cppc3hdsh5dnqoprmfg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4M3JoMdnn14_b_CIUQRXd5_Owfxbzu1o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "28848909826-8pdmoqgd25os7cppc3hdsh5dnqoprmfg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
