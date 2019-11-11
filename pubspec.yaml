@@ -14,7 +14,7 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
   rflutter_alert: ^1.0.2
@@ -25,6 +25,8 @@ dependencies:
   firebase_auth: ^0.14.0+5
   google_sign_in: ^4.0.11
   flutter_facebook_login: ^3.0.0
+  provider: ^3.1.0
+  flutter_launcher_icons: "^0.7.3"
   flutter:
     sdk: flutter
 
@@ -36,6 +38,11 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  android: "launcher_icon" 
+  ios: true
+  image_path: "assets/icons/football.png"
 
 
 # For information on the generic Dart part of this file, see the
@@ -49,12 +56,10 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/dvm.jpg
-    - assets/dvmcity.gif
-    - assets/football.gif
-    - assets/football1.png
-    - assets/football2.png
-    - assets/football3.png
+    - assets/images/
+    - assets/images/headshots/
+    - assets/images/teams/
+    - assets/icons/
 
 
   # To add assets to your application, add an assets section, like this:
@@ -88,15 +93,15 @@ flutter:
   fonts:
     - family: CustomIcons
       fonts:
-        - asset: assets/CustomIcons.ttf
+        - asset: assets/icons/CustomIcons.ttf
 
     - family: Poppins-Bold
       fonts:
-        - asset: assets/Poppins-Bold.ttf
+        - asset: assets/fonts/Poppins-Bold.ttf
 
     - family: Poppins-Medium
       fonts:
-        - asset: assets/Poppins-Medium.ttf
+        - asset: assets/fonts/Poppins-Medium.ttf
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

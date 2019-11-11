@@ -1,7 +1,11 @@
-import 'package:dexter/signinform/Loginpage.dart';
-import 'package:dexter/home_page.dart';
+import 'package:dexter/screens/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import 'package:dexter/screens/home/home.dart';
+import 'package:dexter/screens/playerdex/playerdex.dart';
+import 'package:dexter/screens/player_info/player_info.dart';
+import 'package:dexter/widgets/fade_page_route.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,7 +27,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.grey,
       ),
-      home: MainScreen(),
+      onGenerateRoute: _getRoute,
     );
   }
 }
@@ -33,13 +37,28 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: FirebaseAuth.instance.onAuthStateChanged,
-      builder: (context,AsyncSnapshot<FirebaseUser> snapshot) {
+      builder: (context, AsyncSnapshot<FirebaseUser> snapshot) {
         // if(snapshot.connectionState == ConnectionState.waiting)
         //   return SplashPage();
-        if(!snapshot.hasData || snapshot.data == null)
-          return MyApp1();
-        return HomePage();
+        if (!snapshot.hasData || snapshot.data == null) return Login();
+        return Home();
       },
     );
+  }
+}
+
+Route _getRoute(RouteSettings settings) {
+  switch (settings.name) {
+    case "/":
+      return FadeRoute(page: MainScreen());
+
+    case '/playerdex':
+      return FadeRoute(page: Playerdex());
+
+    case '/player-info':
+      return FadeRoute(page: PlayerInfo());
+
+    default:
+      return null;
   }
 }
