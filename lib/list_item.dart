@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/entity/news.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 
 class ListItem extends StatelessWidget {
@@ -10,12 +10,12 @@ class ListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return RaisedButton(
       onPressed: () {
-            //Use`Navigator` widget to push the second screen to out stack of screens
-            Navigator.of(context)
-                .push(MaterialPageRoute<Null>(builder: (BuildContext context) {
-              return new SecondScreen();
-            }));
-          },
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (BuildContext context) => MyWebView(
+              title: article.title,
+              selectedUrl: article.url,
+            )));
+  },
       // padding: const EdgeInsets.all(8.0),
       child: Container(
           child: Row(
@@ -54,21 +54,25 @@ class ListItem extends StatelessWidget {
   }
 }
 
-class SecondScreen extends StatelessWidget {
-  // final Article article;
-  // ListItem(this.article);
+class MyWebView extends StatelessWidget {
+  final String title;
+  final String selectedUrl;
+  MyWebView({
+    @required this.title,
+    @required this.selectedUrl,
+  });
+
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      routes: {
-        "/": (_) => new WebviewScaffold(
-          url: "https://www.google.com",
-          appBar: new AppBar(
-            title: new Text("defalut"),
-          ),
+    return Scaffold(
+        appBar: AppBar(
+          title: Text(title),
         ),
-      },
-    );
-
+        body: WebView(
+          initialUrl: selectedUrl,
+          javascriptMode: JavascriptMode.unrestricted,
+          onWebViewCreated: (WebViewController webViewController) {
+          },
+        ));
   }
 }
