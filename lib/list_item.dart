@@ -16,7 +16,6 @@ class ListItem extends StatelessWidget {
               selectedUrl: article.url,
             )));
   },
-      // padding: const EdgeInsets.all(8.0),
       child: Container(
           child: Row(
         children: <Widget>[
