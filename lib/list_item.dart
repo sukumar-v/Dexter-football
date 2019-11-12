@@ -14,16 +14,17 @@ class ListItem extends StatelessWidget {
         builder: (BuildContext context) => MyWebView(
               title: article.title,
               selectedUrl: article.url,
+              // print(article.url),R
             )));
   },
       child: Container(
           child: Row(
         children: <Widget>[
-          Container(
-            height: 80,
-            width: 100,
-            child: Image.network(article.urlToImage),
-          ),
+          // Container(
+          //   height: 80,
+          //   width: 100,
+          //   child: Image.network(article.urlToImage),
+          // ),
           Expanded(
             child: Padding(
               padding: EdgeInsets.all(8),

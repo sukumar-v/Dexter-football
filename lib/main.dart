@@ -16,7 +16,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: 'Fart.ai'),
-      // home: FirstScreen(),
     );
   }
 }
@@ -34,7 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void getData() async {
     http.Response response = await http.get(
-        "https://newsapi.org/v2/everything?q=Football&Language=en&sortBy=publishedAt&apiKey=fbf16640d2254a00bf510011d70dc3e6");
+        "https://newsapi.org/v2/everything?q=Premier+League&Language=en&sources=google-news&sortBy=publishedAt&apiKey=fbf16640d2254a00bf510011d70dc3e6");
     setState(() {
       _newsList = News.fromJson(json.decode(response.body)).articles;
     });
